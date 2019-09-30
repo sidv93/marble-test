@@ -16,7 +16,7 @@ export const getMoviesEffect$: HttpEffect = req$ =>
         use(validator$),
         tap(val => console.log('in Get movies effect')),
         mergeMap((req) => of(req.params.id).pipe(
-            // mergeMap(MoviesDao.findOneByImdbID),
+            mergeMap(MoviesDao.findOneByImdbID),
             map(movie => ({ body: [{"name": "Super Deluxe"}]})),
             catchError(() => throwError(
                 new HttpError('Movie does not exist', HttpStatus.NOT_FOUND)
